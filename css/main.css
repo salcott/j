@@ -1,0 +1,38 @@
+
+#results{
+  display:flex;
+  flex-flow: row wrap;
+}
+#results > * {
+  flex: 1 0 auto;
+}
+#js-search-term{
+  padding: 5px 5px;
+}
+.loader {
+  position: relative;
+  display: inline-block;
+}
+.loader::after {
+  content: url(../images/acorn-duotone.svg);
+  display: inline-block;
+  position: absolute;
+  right: -1.5em;
+  width: 0.8em;
+  height: auto;
+  top: 0.2rem;
+  transition: all .3s linear;
+}
+.loader.loading::after {
+  animation-duration: 1.5s;
+	animation-name: dizzy;
+	animation-iteration-count: infinite;
+}
+@keyframes dizzy {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}

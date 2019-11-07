@@ -1,4 +1,7 @@
 
+body{
+  margin: 0;
+}
 #results{
   display:flex;
   flex-flow: row wrap;
@@ -8,6 +11,18 @@
 }
 #js-search-term{
   padding: 5px 5px;
+  padding-top:0.5rem;
+  padding-bottom:0.5rem;
+  padding-left:0.5rem;
+  padding-right:1rem;
+}
+.input_wrapper {
+  display: block;
+  margin: 0 auto;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  margin-top: 3rem;
 }
 .loader {
   position: relative;
@@ -35,4 +50,26 @@
   100% {
     transform: rotate(360deg)
   }
+}
+.row{
+  display: flex;
+  flex-flow: row wrap;
+}
+.col{
+  flex: 1 0 auto;
+  max-width: 100%;
+}
+#park_results .row {
+  margin-bottom: 3rem;
+  padding:3rem;
+}
+
+#park_results > .row:nth-child(even) {
+  background: #efefef;
+}
+#park_results > .row:nth-child(odd) {
+  background: #fff;
+}
+#parkObjects > h2 {
+  margin-left:4rem;
 }

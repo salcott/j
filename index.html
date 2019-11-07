@@ -8,12 +8,15 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <form id="js-form" action="index.html" method="post">
-      <input type="search" name="searchbar" id="js-search-term" placeholder="Search by state" value="wa">
-      <input type="submit" name="searchButton" value="Search">
-    </form>
-    <p id="js-error-message" class="error-message"></p>
-    <section id="results" class="hidden">
+    <div class="input_wrapper">
+      <form id="js-form" action="index.html" method="post">
+        <input type="search" name="searchbar" id="js-search-term" placeholder="Search by state" value="wa">
+        <input type="submit" name="searchButton" value="Search">
+      </form>
+      <p id="js-error-message" class="error-message"></p>
+    </div>
+
+    <!-- <section id="results" class="hidden">
       <div id="parkObjects">
         <h2 class="loader">Park Results</h2>
         <div id="park_results"></div>
@@ -21,6 +24,13 @@
       <div id="result-list-wrapper">
         <h2>Search results</h2>
         <ul id="results-list"></ul>
+      </div>
+    </section> -->
+
+    <section id="results_2" class="hidden">
+      <div id="parkObjects">
+        <h2 class="loader">Park Results</h2>
+        <div id="park_results"></div>
       </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>

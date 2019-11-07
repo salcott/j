@@ -7,11 +7,11 @@
 
 //fetch and api variables
 
-const apiNPS = 'IfcsBFYkZPOU1J024K3TaNhMYXtHZ7bCHqZhtxrP';
-const urlNPS = 'https://developer.nps.gov/api/v1/campgrounds';
-const apiWthr = 'bef3fc1d798647285a40a276507cf08a';
-const urlWthr = 'https://api.weatherunlocked.com/api/forecast/us.';
-const idWthr = '133c3d86';
+const apiNPS ='IfcsBFYkZPOU1J024K3TaNhMYXtHZ7bCHqZhtxrP';
+const urlNPS ='https://developer.nps.gov/api/v1/campgrounds';
+const apiWthr ='bef3fc1d798647285a40a276507cf08a';
+const urlWthr ='http://api.weatherunlocked.com/api/forecast/us.';
+const idWthr ='133c3d86';
 
 
 //function to format query format query parameters
@@ -73,6 +73,7 @@ function getNPSResults(query) {
         $('#park_results').append('<p>'+parkObj.data[i].name+'</p>');
         getWeatherResults(parkObj.data[i].addresses[0].postalCode);
       }
+      //pulling the same postal code every time
     })
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);

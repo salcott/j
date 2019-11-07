@@ -13,7 +13,7 @@ const apiWthr ='bef3fc1d798647285a40a276507cf08a';
 const urlWthr ='http://api.weatherunlocked.com/api/forecast/us.';
 const idWthr ='133c3d86';
 
-/*
+
 var parks = [];
 class Park {
   constructor(park, weather) {
@@ -21,8 +21,8 @@ class Park {
     this.weather_data = weather;
   }
 }
-parks.push(new Park(parkObj, weatherObj)); // <-- this is how you would add parks to the 'global' object
-*/
+//parks.push(new Park(parkObj, weatherObj)); // <-- this is how you would add parks to the 'global' object
+
 
 function getParks() {
   let queryString = formatQueryParams({
@@ -32,8 +32,9 @@ function getParks() {
     api_key: apiNPS
   });
   let url = urlNPS + '?' + queryString;
-  console.log(url);
   $('#parkObjects > .loader').addClass('loading');
+  parks = []; // empty the list of parks
+
   fetch(url)
     .then(response => {
       if (response.ok) {
@@ -64,6 +65,12 @@ function getParks() {
           console.log('oops! something went wrong with this one:');
           console.log(item);
         }
+
+        if(i === response.data.length - 1){
+          // run this block after the last iteration has finished
+          console.log('all park objects:');
+          console.log(parks);
+        }
       }
     })
     .catch(err => {
@@ -91,7 +98,6 @@ function getWeather(target_item, index){
   }
   // safe to rely on the zip code
   const url = urlWthr + location_zip + '?' + queryString;
-  console.log(url);
   fetch(url)
     .then( response => {
 
@@ -150,6 +156,8 @@ function displayWeather(resp, item, index){
   <div class="row forecast-row">${forecast_html}</div>
   </div>`;
   $(html).appendTo('[data-park-id='+index+']');
+
+  parks.push(new Park(item, resp)); // stash this in a variable
 
   $('#results_2').removeClass('hidden');
 }

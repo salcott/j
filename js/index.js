@@ -53,8 +53,6 @@ function getParks() {
         throw new Error('Returned data has no length!');
       }
 
-      let park_html_row = '';
-
       for (let i=0; i<response.data.length; i++) {
         let item = response.data[i];
         let name = '';
@@ -179,7 +177,7 @@ Establish pages navigation feature
 Expand result information displayed
 */
 
-// Existing code presently unused 
+// Existing code presently unused
 /*
 
 //function to render both parkObj and weatherObj

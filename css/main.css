@@ -132,7 +132,7 @@ body{
   padding:3rem;
 }
 #park_results > .row:nth-child(even) {
-  background: #efefef;
+  background: #f4f9f6;
 }
 #park_results > .row:nth-child(odd) {
   /* background: #fff; */

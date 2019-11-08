@@ -122,6 +122,7 @@ body{
 #parkObjects {
   position:relative;
   min-height:20em;
+  max-width: 100%;
 }
 #parkObjects::before {
   content: '';

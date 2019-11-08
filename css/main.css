@@ -55,7 +55,7 @@ body{
   right: -1.5em;
   width: 0.8em;
   height: auto;
-  top: 0.2rem;
+  top: 0.4rem;
   transition: all .3s linear;
 }
 .loader.loading::after {

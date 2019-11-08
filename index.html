@@ -16,26 +16,22 @@
       </div>
       <form id="js-form" action="index.html" method="post">
         <input type="search" name="searchbar" id="js-search-term" placeholder="Search by State Code" value="">
+        <select name="limit" id="query-limit">
+          <option selected value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+        </select>
         <input type="submit" name="searchButton" id="search-button" value="Find Camps">
       </form>
       <p id="js-error-message" class="error-message"></p>
     </div>
 
-    <!-- <section id="results" class="hidden">
-      <div id="parkObjects">
-        <h2 class="loader">Park Results</h2>
-        <div id="park_results"></div>
-      </div>
-      <div id="result-list-wrapper">
-        <h2>Search results</h2>
-        <ul id="results-list"></ul>
-      </div>
-    </section> -->
-
-    <section id="results_2" class="hidden">
+    <section id="results" class="hidden">
       <div id="parkObjects">
         <div class="title-wrap">
-          <h2 class="loader">Park Results</h2>
+          <h2 class="loader">Park Results<span id="result_count"></span></h2>
         </div>
         <div id="park_results"></div>
       </div>

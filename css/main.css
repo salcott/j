@@ -52,7 +52,7 @@ body{
   content: url(../images/acorn-duotone.svg);
   display: inline-block;
   position: absolute;
-  right: -1.5em;
+  right: -1.45em;
   width: 0.8em;
   height: auto;
   top: 0.4rem;
@@ -115,6 +115,10 @@ body{
   position:relative;
   transition: all .2s ease-in-out;
 }
+#search-button[disabled] {
+  cursor: not-allowed;
+  background: rgba(49, 107, 75, 0.49);
+}
 #parkObjects {
   position:relative;
   min-height:20em;
@@ -155,6 +159,34 @@ body{
   margin-left: 4rem;
   color: #306d4b;
   font-weight: 500;
+}
+#result_count {
+  margin-left: 1rem;
+  font-size: 0.6rem;
+  font-style: italic;
+  position: absolute;
+  top: 0.95rem;
+  right: -1.85rem;
+  color: #d0eede;
+  z-index: 1;
+}
+#query-limit {
+  /* -webkit-appearance: none; */
+  -moz-appearance: none;
+  appearance: none;       /* Remove default arrow */
+  /* background-image: url(../images/acorn-duotone.svg); */
+  width: 4rem;
+  background-repeat: no-repeat;
+  background-position: right;
+  /* padding: 5px; */
+  font-size: 1rem;
+  height: 2rem;
+  padding-left: 0.6rem;
+  position: relative;
+  top: -1px;
+  background-size: contain;
+  color: #32694b;
+  border: 1px solid #a1bfaf;
 }
 footer{
   text-align: center;

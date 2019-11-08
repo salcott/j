@@ -26,14 +26,16 @@ class Park {
 function getParks() {
   let queryString = formatQueryParams({
     stateCode: $('#js-search-term').val(),
-    limit: 5,
+    limit: $('#query-limit').find("option:selected").val(),
     fields: "addresses",
     api_key: apiNPS
   });
   let url = urlNPS + '?' + queryString;
   $('#js-error-message').text('');
+  $('#result_count').text('');
   $('.title-wrap > .loader').addClass('loading');
   parks = []; // empty the list of parks
+  $('#search-button').attr('disabled', true);// prevent more searches until this completes
 
   fetch(url)
     .then(response => {
@@ -47,13 +49,15 @@ function getParks() {
       // console.log(parkObj);
       $('.title-wrap > .loader').removeClass('loading');
       $('#park_results').html('');
-
+      $('#search-button').attr('disabled', false);
       /* Add a check to prevent 'Cannot find blah blah of undefined' errors */
       if(!response || !response.hasOwnProperty('data') || !response.data.hasOwnProperty('length')){
         // not the data we are expecting
         throw new Error('Returned data has no length!');
       }
 
+      $('#result_count').text(response.data.length);
+      console.log(response.data);
       for (let i=0; i<response.data.length; i++) {
         let item = response.data[i];
         let name = '';
@@ -66,7 +70,6 @@ function getParks() {
             $('#park_results').append('<div class="row" data-park-id="'+i+'"></div>'); // this becomes our 'hook' to find where to insert html after getWeather() runs
             getWeather(item, i); // ** only passing this single 'item' to getWeather, not the entire parkObj list
           }
-
 
         }else{
           console.log('oops! something went wrong with this one:');
@@ -174,7 +177,7 @@ function displayWeather(resp, item, index){
 
   parks.push(new Park(item, resp)); // stash this in a variable
 
-  $('#results_2').removeClass('hidden');
+  $('#results').removeClass('hidden');
 }
 
 //function to format query format query parameters

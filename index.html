@@ -9,9 +9,14 @@
   </head>
   <body>
     <div class="input_wrapper">
+      <div class="logo_wrapper">
+        <span>GET</span>
+        <img class="logo" src="images/get-lost-logo-icon.svg" />
+        <span>LOST</span>
+      </div>
       <form id="js-form" action="index.html" method="post">
-        <input type="search" name="searchbar" id="js-search-term" placeholder="Search by State Code" value="wa">
-        <input type="submit" name="searchButton" value="Search">
+        <input type="search" name="searchbar" id="js-search-term" placeholder="Search by State Code" value="">
+        <input type="submit" name="searchButton" id="search-button" value="Search">
       </form>
       <p id="js-error-message" class="error-message"></p>
     </div>
@@ -35,6 +40,9 @@
         <div id="park_results"></div>
       </div>
     </section>
+    <footer class="footer">
+      <p>DefinitelyNotJonathan © 2019. All Rights Reserved.</p>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
   </body>

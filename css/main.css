@@ -1,6 +1,8 @@
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,500,600i,700&display=swap');
 body{
   margin: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 #results{
   display:flex;
@@ -59,17 +61,39 @@ body{
   flex: 1 0 auto;
   max-width: 100%;
 }
+#parkObjects {
+  position:relative;
+  min-height:20em;
+}
+#parkObjects::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0.7em;
+  top: 4.6em;
+  background-image: url(../images/trees-duotone-green.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 24em;
+  min-width: 31em;
+}
 #park_results .row {
-  margin-bottom: 3rem;
   padding:3rem;
 }
-
 #park_results > .row:nth-child(even) {
   background: #efefef;
 }
 #park_results > .row:nth-child(odd) {
   background: #fff;
 }
-#parkObjects > h2 {
-  margin-left:4rem;
+.title-wrap{
+  background: #b3e4c9;
+  margin-bottom: 0.2rem;
+  border-bottom: 1px solid #b5d8c5;
+}
+.title-wrap > h2 {
+  margin-left: 4rem;
+  color: #306d4b;
+  font-weight: 500;
 }

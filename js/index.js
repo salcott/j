@@ -23,7 +23,6 @@ class Park {
 }
 //parks.push(new Park(parkObj, weatherObj)); // <-- this is how you would add parks to the 'global' object
 
-
 function getParks() {
   let queryString = formatQueryParams({
     stateCode: $('#js-search-term').val(),
@@ -32,7 +31,8 @@ function getParks() {
     api_key: apiNPS
   });
   let url = urlNPS + '?' + queryString;
-  $('#parkObjects > .loader').addClass('loading');
+  $('#js-error-message').text('');
+  $('.title-wrap > .loader').addClass('loading');
   parks = []; // empty the list of parks
 
   fetch(url)
@@ -45,7 +45,7 @@ function getParks() {
     .then(function(response) {
       // console.log('lets view parkObj:');
       // console.log(parkObj);
-      $('#parkObjects > .loader').removeClass('loading');
+      $('.title-wrap > .loader').removeClass('loading');
       $('#park_results').html('');
 
       /* Add a check to prevent 'Cannot find blah blah of undefined' errors */
@@ -59,8 +59,15 @@ function getParks() {
         let name = '';
         name = item['name'];
         if(item && name){
-          $('#park_results').append('<div class="row" data-park-id="'+i+'"></div>'); // this becomes our 'hook' to find where to insert html after getWeather() runs
-          getWeather(item, i); // ** only passing this single 'item' to getWeather, not the entire parkObj list
+
+          if(!item.hasOwnProperty('addresses')){
+            console.log('this result is missing the "addresses" field!');
+          }else{
+            $('#park_results').append('<div class="row" data-park-id="'+i+'"></div>'); // this becomes our 'hook' to find where to insert html after getWeather() runs
+            getWeather(item, i); // ** only passing this single 'item' to getWeather, not the entire parkObj list
+          }
+
+
         }else{
           console.log('oops! something went wrong with this one:');
           console.log(item);
@@ -90,7 +97,15 @@ function getWeather(target_item, index){
     app_id:idWthr,
     app_key:apiWthr
   });
-  let location_zip = target_item['addresses'][0].postalCode;
+
+  let location_zip;
+  console.log('target_item:');
+  console.log(target_item);
+  if(target_item['addresses'].hasOwnProperty('postalCode')){
+    location_zip = target_item['addresses']['postalCode'];// only a single postal code returned
+  }else if(target_item['addresses'].hasOwnProperty('length') && target_item['addresses'].length > 0){
+    location_zip = target_item['addresses'][0].postalCode; // there are more than 1 zip code supplied, we'll take the first one
+  }
   if(!location_zip){
     console.log('Whoops! No zip code found!');
     console.log(target_item);

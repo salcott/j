@@ -10,7 +10,7 @@
   <body>
     <div class="input_wrapper">
       <form id="js-form" action="index.html" method="post">
-        <input type="search" name="searchbar" id="js-search-term" placeholder="Search by state" value="wa">
+        <input type="search" name="searchbar" id="js-search-term" placeholder="Search by State Code" value="wa">
         <input type="submit" name="searchButton" value="Search">
       </form>
       <p id="js-error-message" class="error-message"></p>
@@ -29,7 +29,9 @@
 
     <section id="results_2" class="hidden">
       <div id="parkObjects">
-        <h2 class="loader">Park Results</h2>
+        <div class="title-wrap">
+          <h2 class="loader">Park Results</h2>
+        </div>
         <div id="park_results"></div>
       </div>
     </section>

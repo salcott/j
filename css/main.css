@@ -108,6 +108,12 @@ body{
   color: #fff;
   text-transform: uppercase;
   outline: none;
+  cursor: pointer;
+}
+#search-button:active{
+  top:1px;
+  position:relative;
+  transition: all .2s ease-in-out;
 }
 #parkObjects {
   position:relative;

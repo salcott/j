@@ -47,7 +47,6 @@ function getParks() {
     .then(function(response) {
       // console.log('lets view parkObj:');
       // console.log(parkObj);
-      $('.title-wrap > .loader').removeClass('loading');
       $('#park_results').html('');
       $('#search-button').attr('disabled', false);
       /* Add a check to prevent 'Cannot find blah blah of undefined' errors */
@@ -57,6 +56,7 @@ function getParks() {
       }
 
       $('#result_count').text(response.data.length);
+      console.log('getParks() response data:');
       console.log(response.data);
       for (let i=0; i<response.data.length; i++) {
         let item = response.data[i];
@@ -87,6 +87,9 @@ function getParks() {
       console.log('error happened');
       console.log(err);
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    })
+    .finally( () => {
+      $('.title-wrap > .loader').removeClass('loading');
     });
 }
 
@@ -96,17 +99,22 @@ function getWeather(target_item, index){
   // is getting iterated over with each park object returned, so
   // we are only interested in the single iteration being called once at a time -> target_item
 
+  if(!target_item || !target_item.hasOwnProperty('addresses')){
+    console.log('there is no target_item!');
+    return false;
+  }
+
   const queryString = formatQueryParams({
     app_id:idWthr,
     app_key:apiWthr
   });
 
   let location_zip;
-  console.log('target_item:');
-  console.log(target_item);
+  // console.log('target_item:');
+  // console.log(target_item);
   if(target_item['addresses'].hasOwnProperty('postalCode')){
     location_zip = target_item['addresses']['postalCode'];// only a single postal code returned
-  }else if(target_item['addresses'].hasOwnProperty('length') && target_item['addresses'].length > 0){
+  }else if(target_item['addresses'].hasOwnProperty('length') && target_item['addresses'].length > 0 && target_item['addresses'][0].hasOwnProperty('postalCode')){
     location_zip = target_item['addresses'][0].postalCode; // there are more than 1 zip code supplied, we'll take the first one
   }
   if(!location_zip){
@@ -146,15 +154,24 @@ function displayWeather(resp, item, index){
   // console.log(resp);
   // console.log(item);
   let forecast = resp['Days'];
-  if(!forecast || !forecast.length){
+
+  if(!forecast || !forecast.hasOwnProperty('length') || !forecast.length){ // false, '', null, undefined, 0
     console.log('could not cypher forecast!');
     return;
   }
   let forecast_html = '';
+
+  console.log('displayWeather() forecast:', index);
+  console.log(forecast);
+
   for (let i=0;i<forecast.length;i++){ // iterate over each day returned
     forecast_html += '<div class="col">';
     forecast_html += '<h5 class="">'+forecast[i]['date']+'</h5>';
     if(forecast[i].hasOwnProperty('Timeframes') && forecast[i].Timeframes.length > 0){ // iterate over each 'Timeframes' received within a day
+
+      console.log('Timeframes: Day '+i);
+      console.log(forecast[i].Timeframes);
+
       for ( let j=0;j<forecast[i].Timeframes.length;j++){
         let timeframe = forecast[i].Timeframes[j];
         forecast_html += '<div>'+timeframe['utctime']+': '+timeframe['wx_desc']+ '</div>';
@@ -164,7 +181,7 @@ function displayWeather(resp, item, index){
   }
 
   let html = `<div class="col"><h3>${item.name}</h3>
-  <p>State: ${item.addresses[0].stateCode}
+  <p>State: ${item.addresses[0].stateCode}</p>
   <p>Designation: ${item.accessibility.classifications}</p>
   <p>Description: ${item.description}</p>
   <p>Weather Info: ${item.weatheroverview}</p>
@@ -204,10 +221,10 @@ Expand result information displayed
 */
 
 // Existing code presently unused
-/*
+
 
 //function to render both parkObj and weatherObj
-
+/*
 function displayResults(parkObj, weatherObj) {
   console.log(parkObj)
   console.log(weatherObj)
@@ -227,7 +244,6 @@ function displayResults(parkObj, weatherObj) {
     )};
   $('#results_2').removeClass('hidden');
 }
-
 //function to set api 1 params and send GET request
 
 function getNPSResults(query) {
